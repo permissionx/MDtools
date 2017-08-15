@@ -1,4 +1,4 @@
-def msd_single(steps, id, nplot, istep, timestep):
+def msd_single(steps, id, nplot, istep, ave_level, timestep):
 	'''
 	compute msd of a single atom
 	unit: Angstrom^2/ps
@@ -13,7 +13,7 @@ def msd_single(steps, id, nplot, istep, timestep):
 		nadd = 1
 		while cstep+inter_step < len(steps):
 			tmsd += dr2(rs[cstep+inter_step],rs[cstep])
-			cstep += 1
+			cstep += int(len(steps) / ave_level)
 			nadd += 1
 		avemsd[inter_step*step_dt] = tmsd / nadd
 		print('Number of inter points: {0}'.format(inter_point))
@@ -48,10 +48,10 @@ def ajust_boundary(steps, id):
 					j += 1
 	return list(zip(rs[0],rs[1],rs[2]))
 
-def msd_multi(steps, ids,  nplot, istep, timestep):
-	ave_msd = msd_single(steps, ids[0],  nplot, istep, timestep)
+def msd_multi(steps, ids, timestep, istep ,nplot = 10,  ave_level = 200):
+	ave_msd = msd_single(steps, ids[0],  nplot, istep, ave_level, timestep)
 	for id in ids[1:]:
-		msd = msd_single(steps, id,  nplot, istep, timestep)
+		msd = msd_single(steps, id,  nplot, istep, ave_level, timestep)
 		for key,value in msd.items():
 			ave_msd[key] += value
 	for key,value in ave_msd.items():
