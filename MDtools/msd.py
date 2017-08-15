@@ -38,13 +38,13 @@ def ajust_boundary(steps, id):
 				pass
 			elif dx > 1/2*lenth:
 				j = i+1
-				while j <= len(xs):
+				while j < len(xs):
 					xs[j] -= lenth
 					j += 1
 			else:
 				j = i+1
-				while j <= len(xs):
-					sz[j] += lenth
+				while j < len(xs):
+					xs[j] += lenth
 					j += 1
 	return list(zip(rs[0],rs[1],rs[2]))
 
@@ -63,11 +63,10 @@ if __name__ == '__main__':
 	file = input('test file: ')
 	steps = mt.rdump(file)
 	print(len(steps))
-	nplot = int(input('nplot: '))
 	istep = int(input('init_delta_step: '))
 	timestep = float(input('timestep: '))
-	ids = [int(word) for word in intput("ids: ").split()]
-	msd = msd_mutil(steps, ids, nplot, istep, timestep)
+	ids = [int(word) for word in input("ids: ").split()]
+	msd = msd_multi(steps, ids, timestep, istep, ave_level = 1000)
 
 
 
