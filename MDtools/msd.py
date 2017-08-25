@@ -48,7 +48,7 @@ def ajust_boundary(steps, id):
 					j += 1
 	return list(zip(rs[0],rs[1],rs[2]))
 
-def msd_multi(steps, ids, timestep, istep ,nplot = 10,  ave_level = 200):
+def msd_multi(steps, ids, timestep = 0.0001, istep = 10 ,nplot = 10,  ave_level = 1000):
 	ave_msd = msd_single(steps, ids[0],  nplot, istep, ave_level, timestep)
 	for id in ids[1:]:
 		msd = msd_single(steps, id,  nplot, istep, ave_level, timestep)
