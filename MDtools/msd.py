@@ -1,7 +1,7 @@
 def msd_single(steps, id, nplot, istep, ave_level, timestep):
 	'''
 	compute msd of a single atom
-	unit: Angstrom^2/ps
+	unit: Angstrom^2, ps
 	'''
 	step_dt = (steps[1].count - steps[0].count)*timestep
 	rs = ajust_boundary(steps, id)
@@ -57,6 +57,18 @@ def msd_multi(steps, ids, timestep = 0.0001, istep = 10 ,nplot = 10,  ave_level 
 	for key,value in ave_msd.items():
 		ave_msd[key] /= len(ids)
 	return ave_msd
+
+def compute_diff_coe(msddata):
+	# unit: unit: Angstrom^2/ps
+	from scipy import stats
+	times = []
+	x2s = []
+	for time, x2 in msddata.items():
+		times.append(time)
+		x2s.append(x2)
+	diff_coe = stats.linregress(time, x2)[0] / 6
+	r2 = stats.linregress(time, x2)[2] ** 2
+	return diff_coe, r2
 
 if __name__ == '__main__':
 	import MDtools as mt
