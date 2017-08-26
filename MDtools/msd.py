@@ -66,8 +66,9 @@ def compute_diff_coe(msddata):
 	for time, x2 in msddata.items():
 		times.append(time)
 		x2s.append(x2)
-	diff_coe = stats.linregress(time, x2)[0] / 6
-	r2 = stats.linregress(time, x2)[2] ** 2
+	linregress = stats.linregress(times, x2s)
+	diff_coe = linregress[0]
+	r2 = linregress[2]
 	return diff_coe, r2
 
 if __name__ == '__main__':
