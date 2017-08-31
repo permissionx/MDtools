@@ -5,6 +5,8 @@ class Step:
 		self.atoms = atoms   # dict
 		self.count = count
 		self.box = box
+	def return_an_atom(self):
+		return self.atoms[list(self.atoms.keys())[0]]
 
 class Atom:
 	def __init__(self, properties):
@@ -60,6 +62,29 @@ def rdump(filename):
 			steps.append(step)
 	return steps
 
+def wdump(steps, filename):
+	with open(filename, 'w') as file:
+		for step in steps:
+			file.write('ITEM: TIMESTEP\n')
+			file.write(str(step.count)+'\n')
+			file.write('ITEM: NUMBER OF ATOMS\n')
+			file.write(str(len(step.atoms))+'\n')
+			file.write('ITEM: BOX BOUNDS pp pp pp\n')
+			for d in step.box:
+				file.write('{0} {1}\n'.format(d[0],d[1]))
+			file.write('ITEM: ATOMS ')
+			for k in step.return_an_atom().properties.keys():
+				file.write(k+' ')
+			file.write('\n')
+			for id_,atom in step.atoms.items():
+				for k,v in atom.properties.items():
+					file.write(str(v)+' ')
+				file.write('\n')
+
+
+
+
 if __name__ == '__main__':
 	filename = input('dump file name: ')
-	steps = read(filename)
+	steps = rdump(filename)
+	wdump(steps, 'test.out.dump')
