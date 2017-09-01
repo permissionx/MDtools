@@ -9,7 +9,7 @@ MDtools is a python library to manage the outputs of MD(LAMMPS) calculations.
 * scipy
 
 ## Installation
-MDtools is developed on Python3 (Windows 10) and is recommended to be used on Python3. It should be test before you use it on Python2.
+MDtools is developed on Python3 (Windows 10) and is recommended to be used on Python3. It should be tested before you use it on Python2.
 
 You can install it via clone and install
 ```
