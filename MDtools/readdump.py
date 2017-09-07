@@ -62,7 +62,7 @@ def rdump(filename):
 			steps.append(step)
 	return steps
 
-def wdump(steps, filename):
+def wdump(steps, filename, properties):
 	with open(filename, 'w') as file:
 		for step in steps:
 			file.write('ITEM: TIMESTEP\n')
@@ -73,12 +73,12 @@ def wdump(steps, filename):
 			for d in step.box:
 				file.write('{0} {1}\n'.format(d[0],d[1]))
 			file.write('ITEM: ATOMS ')
-			for k in step.return_an_atom().properties.keys():
-				file.write(k+' ')
+			for p in properties:
+				file.write(p+' ')
 			file.write('\n')
 			for id_,atom in step.atoms.items():
-				for k,v in atom.properties.items():
-					file.write(str(v)+' ')
+				for p in properties:
+					file.write(str(atom[p])+' ')
 				file.write('\n')
 
 
