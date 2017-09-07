@@ -10,13 +10,13 @@ def msd_single(steps, id, nplot, istep, ave_level, timestep):
 		inter_step = inter_point * istep
 		cstep = 0
 		tmsd = 0
-		nadd = 1
+		nadd = 0
 		while cstep+inter_step < len(steps):
 			tmsd += dr2(rs[cstep+inter_step],rs[cstep])
 			cstep += int(len(steps) / ave_level)
 			nadd += 1
 		avemsd[inter_step*step_dt] = tmsd / nadd
-		print('Number of inter points: {0}'.format(inter_point))
+		print('Number of inter points and add: {0} {1}'.format(inter_point, nadd))
 	return avemsd
 
 def dr2(r0,r1):
@@ -73,13 +73,12 @@ def compute_diff_coe(msddata):
 
 if __name__ == '__main__':
 	import MDtools as mt
-	file = input('test file: ')
-	steps = mt.rdump(file)
-	print(len(steps))
-	istep = int(input('init_delta_step: '))
-	timestep = float(input('timestep: '))
-	ids = [int(word) for word in input("ids: ").split()]
-	msd = msd_multi(steps, ids, timestep, istep, ave_level = 1000)
+	steps = mt.rdump('H.dump')
+	msd = msd_multi(steps, [2001], istep = 1000, ave_level = 100, nplot = 5)
+	coe = compute_diff_coe(msd)
+	print(coe)
+	for k,v in msd.items():
+		print(k,v)
 
 
 
