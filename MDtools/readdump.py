@@ -78,7 +78,7 @@ def wdump(steps, filename, properties):
 			file.write('\n')
 			for id_,atom in step.atoms.items():
 				for p in properties:
-					file.write(str(atom[p])+' ')
+					file.write(str(atom.properties[p])+' ')
 				file.write('\n')
 
 
