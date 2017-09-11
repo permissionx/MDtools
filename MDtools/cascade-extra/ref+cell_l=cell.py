@@ -36,4 +36,4 @@ def sia_va(refdump, cascadedump, siavadump):
 			if (nstep%100 == 0) : print(nstep)
 
 if __name__ == '__main__':
-	sia_va(refdump = 'ref.dump', cascadedump = 'sia-va_lammps.dump', siavadump = 'sia-va.dump')
+	sia_va(refdump = 'ref.dump', cascadedump = 'cell_lammps.dump', siavadump = 'cell.dump')

@@ -29,6 +29,9 @@ def ajust_boundary(steps, id):
 	for step in steps:
 		for x,xname in zip(rs,['x','y','z']):
 			x.append(step.atoms[key].properties[xname])
+	with open('debug0','w') as file:
+		for i in zip(rs[0],rs[1],rs[2]):
+			file.write('{0} {1} {2}\n'.format(i[0],i[1],i[2]))
 	for xs,d in zip(rs,range(3)):
 		for i in range(len(xs)-1):
 			boundary = steps[i].box[d]
@@ -46,6 +49,9 @@ def ajust_boundary(steps, id):
 				while j < len(xs):
 					xs[j] += lenth
 					j += 1
+	with open('debug','w') as file:
+		for i in zip(rs[0],rs[1],rs[2]):
+			file.write('{0} {1} {2}\n'.format(i[0],i[1],i[2]))
 	return list(zip(rs[0],rs[1],rs[2]))
 
 def msd_multi(steps, ids, timestep = 0.0001, istep = 10 ,nplot = 10,  ave_level = 1000):
@@ -73,7 +79,7 @@ def compute_diff_coe(msddata):
 
 if __name__ == '__main__':
 	import MDtools as mt
-	steps = mt.rdump('H.dump')
+	steps = mt.rdump('H1.dump')
 	msd = msd_multi(steps, [2001], istep = 1000, ave_level = 100, nplot = 5)
 	coe = compute_diff_coe(msd)
 	print(coe)
