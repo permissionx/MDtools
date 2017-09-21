@@ -34,6 +34,17 @@ class Atom:
         if 'type' in keys:
             self.type = properties['type']
 
+    def get_properties(self):
+        properties = self.properties
+        keys = properties.keys()
+        if 'x' in keys and 'y' in keys and 'z' in keys:
+            properties['x'] = self.r[0]
+            properties['y'] = self.r[1]
+            properties['z'] = self.r[2]
+        return properties
+
+
+
 
 def rdump(filename):
     steps = []
@@ -87,7 +98,7 @@ def wdump(steps, filename, properties):
             file.write('\n')
             for id_, atom in step.atoms.items():
                 for p in properties:
-                    file.write(str(atom.properties[p]) + ' ')
+                    file.write(str(atom.get_properties()[p]) + ' ')
                 file.write('\n')
 
 
