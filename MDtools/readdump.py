@@ -20,7 +20,7 @@ class Atom:
         for intkey in ['id', 'type']:
             if intkey in properties.keys():
                 properties[intkey] = int(properties[intkey])
-        self.properties = properties 	# dict
+        self.properties = properties    # dict
         self.packacge()
 
     def packacge(self):
@@ -42,8 +42,6 @@ class Atom:
             properties['y'] = self.r[1]
             properties['z'] = self.r[2]
         return properties
-
-
 
 
 def rdump(filename):

@@ -67,7 +67,9 @@ def compute_msd(steps, ids, timestep=0.0001, istep=1, nplot=10, ave_level=1000):
 
 
 def compute_diff_coe(msddata):
-    # unit: unit: Angstrom^2/ps
+    '''
+    unit: unit: Angstrom^2/ps
+    '''
     from scipy import stats
     times = []
     x2s = []
