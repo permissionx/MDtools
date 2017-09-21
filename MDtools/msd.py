@@ -30,8 +30,8 @@ def ajust_boundary(steps, id):
     rs = [[], [], []]
     key = id
     for step in steps:
-        for x, xname in zip(rs, ['x', 'y', 'z']):
-            x.append(step.atoms[key].properties[xname])
+        for x, xname in zip(rs, [0, 1, 2]):
+            x.append(step.atoms[key].r[xname])
     for xs, d in zip(rs, range(3)):
         for i in range(len(xs) - 1):
             boundary = steps[i].box[d]
