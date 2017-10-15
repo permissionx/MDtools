@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 
 class Step:
@@ -42,6 +43,7 @@ class Atom:
             properties['y'] = self.r[1]
             properties['z'] = self.r[2]
         return properties
+
 
 
 def rdump(filename):

@@ -24,7 +24,7 @@ def sia_dirction(self):
     dr = self.neibours[1].r - self.neibours[0].r
     maxr = max(abs(dr))
     for i in range(3):
-        if abs(dr[i]) / maxr < 0.2:
+        if abs(dr[i]) / maxr < 0.5:
             dr[i] = 0
     self.dirction = [int(i / abs(i)) if i != 0 else 0 for i in dr]
     self.properties['c_2[1]'] = int(self.properties['c_2[1]'])
@@ -44,6 +44,6 @@ for k, atom in atoms_cell.items():
 
 step = mt.Step(atoms_cell, 0, mt.rdump('cell.dump')[-1].box)
 steps = [step]
-mt.wdump(steps, 'cell_direction.dump', [
-         'id', 'type', 'x', 'y', 'z', 'c_2[1]', 'd1', 'd2', 'd3'])
+mt.wdump(steps, 'cell_direction.dump', 
+        ['id', 'type', 'x', 'y', 'z', 'c_2[1]', 'd1', 'd2', 'd3'])
 print('good luck!')
