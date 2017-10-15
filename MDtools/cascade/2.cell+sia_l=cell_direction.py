@@ -24,7 +24,7 @@ def sia_dirction(self):
     dr = self.neibours[1].r - self.neibours[0].r
     maxr = max(abs(dr))
     for i in range(3):
-        if abs(dr[i]) / maxr < 0.5:
+        if abs(dr[i]) / maxr < 0.3:
             dr[i] = 0
     self.dirction = [int(i / abs(i)) if i != 0 else 0 for i in dr]
     self.properties['c_2[1]'] = int(self.properties['c_2[1]'])
